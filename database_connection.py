@@ -174,10 +174,11 @@ class UserTable:
         
 if __name__ == '__main__':
     config = {
-        'user': 'test-user',
+        'user': 'newuser',
         'password': 'password',
-        'host': 'localhost',
-        'database': 'test_web_app'
+        'host': '0.tcp.ngrok.io',
+        'database': 'test_web_app',
+        'port': '18159'
     } 
     ans_schema = AnswerTable(**config)
     ans_schema.read_answers('1')
