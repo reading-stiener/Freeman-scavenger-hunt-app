@@ -213,19 +213,21 @@ class UserTable:
         user_id = cursor.fetchall()    
         if user_id:
             cursor.close()
-            return user_id[0]
+            return True
         else:
-            insert_query = (
-                'INSERT INTO user_table (username, password) '
-                'VALUES (%s, %s)'
-            )
-            cursor.execute(insert_query, user_data)
-            conn.commit()
-        cursor.execute(query, user_data)
-        user_id = cursor.fetchall()
-        cursor.close()
-        return user_id[0]
-        
+            return False
+
+    def add_user(self, username, password):
+        conn = self.cnx
+        cursor = conn.cursor()
+        insert_query = (
+            'INSERT INTO user_table (username, password) '
+            'VALUES (%s, %s)'
+        )
+        user_data = (username, password)
+        cursor.execute(insert_query, user_data)
+        conn.commit()
+
 if __name__ == '__main__':
     config = {
         'user': 'test-user',

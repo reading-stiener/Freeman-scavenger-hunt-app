@@ -3,22 +3,42 @@
 #Scavenger Hunt webapp
 
 #Importing Modules
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, session
+from markupsafe import escape
 from database_connection import AnswerTable, UserTable, GameTable
-from game_logic import handle_answer
+from game_logic import handle_answer, handle_login, handle_signups
+from datetime import timedelta
 
+# Set the secret key to some random bytes. Keep this really secret!
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.permanent_session_lifetime = timedelta(minutes=20)
+
+@app.route('/')
+def index():
+    if 'username' in session:
+        return 'Logged in as %s' % escape(session['username'])
+    return 'You are not logged in.'
 
 # Route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
+        username, password = request.form['username'], request.form['password']
+        session.permanent = True
+        if handle_login(username, password):
+            session['username'] = username
+            return redirect(url_for('index'))
         else:
-            return redirect(url_for('home'))
+            return redirect(url_for('index'))
     return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 # Route for the handling the questions page for a user
 @app.route('/question', methods=['GET', 'POST'])
@@ -28,11 +48,8 @@ def question():
         ans = request.form['answer']
         question = request.args.get('question')
         user = request.args.get('user')
-        handle_answer(ans, question, user)
-        return ans
+        return handle_answer(ans, question, user)
     return render_template('question.html', error=error)
-        
-
 
 if __name__ == '__main__':
     config = {

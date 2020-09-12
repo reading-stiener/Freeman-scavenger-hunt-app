@@ -1,6 +1,5 @@
 from database_connection import UserTable, GameTable, AnswerTable 
 
-
 config = {
     'user': 'test-user',
     'password': 'password',
@@ -9,11 +8,13 @@ config = {
     #'port': '18159'
 } 
 
+def handle_login(username, password): 
+    user_table = UserTable(**config)
+    return user_table.query_user(username, password)
 
-user_table = UserTable(**config)
-def handle_login(request): 
-    #code goes here
-    pass 
+def handle_signups(username, password):
+    user_table = UserTable(**config)
+    return user_table.add_user(user_name, password)
 
 def handle_answer(ans, question, user):
     user_ans = ans
