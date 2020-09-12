@@ -19,6 +19,11 @@ def login():
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
+# Route for the handling the questions page for a user
+@app.route('/question', methods=['GET', 'POST'])
+def question(): 
+    pass 
+
 if __name__ == '__main__':
     config = {
         'user': 'test-user',
