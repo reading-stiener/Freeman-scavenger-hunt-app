@@ -14,13 +14,49 @@ class AnswerTable:
             else:
                 print(err)
 
-    def create_table(self):
+    def create_table(self, **q_answers):
         # leaving this out because we can manually set this up before hand 
-        pass
+        DB_NAME = self.config['database']
+        TABLE = (
+            'CREATE TABLE answer_table ('
+            '   question_no int NOT NULL AUTO_INCREMENT PRIMARY KEY,'
+            '   question varchar(256) NOT NULL,'
+            '   answer varchar(256) NOT NULL'
+            ')'
+        )
+        conn = self.cnx;
+        cursor = conn.cursor(buffered=True)
+        try: 
+            cursor.execute( 
+                'CREATE DATABASE {}'.format(DB_NAME)
+            )
+        except mysql.connector.Error as err:
+            print("Failed creating database: {}".format(err))
+
+        table_description = TABLE
+        try:
+            print("Creating table {}: ".format('answer_table'), end='')
+            cursor.execute(table_description)
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
+                print("already exists.")
+            else:
+                print(err.msg)
+        else:
+            print("OK")
+
+        insert_query = (
+            'INSERT INTO answer_table (question, answer)'
+            'values (%s, %s)'
+        )
+        data = [(key, value) for key, value in q_answers.items()]
+        cursor.executemany(insert_query, data)
+        conn.commit()
+        cursor.close()
 
     def read_answers(self, question_num):
         cursor = self.cnx.cursor()
-        query = 'SELECT answers from answers WHERE questions = %s'
+        query = 'SELECT answer from answer_table WHERE question = %s'
         question = (question_num,)
         cursor.execute(query, question)
         for answer in cursor: 
@@ -174,13 +210,20 @@ class UserTable:
         
 if __name__ == '__main__':
     config = {
-        'user': 'newuser',
+        'user': 'test-user',
         'password': 'password',
-        'host': '0.tcp.ngrok.io',
+        'host': 'localhost',
         'database': 'test_web_app',
-        'port': '18159'
+        #'port': '18159'
     } 
     ans_schema = AnswerTable(**config)
+    q_ans ={ 
+        'one' : 1,
+        'two' : 2, 
+        'three' : 3,
+        'four' : 4
+    }
+    ans_schema.create_table(**q_ans)
     ans_schema.read_answers('1')
     game_table = GameTable(**config)
     user_table = UserTable(**config)
