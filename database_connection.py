@@ -15,8 +15,8 @@ class AnswerTable:
                 print(err)
 
     def create_table(self, **q_answers):
-        # leaving this out because we can manually set this up before hand 
         DB_NAME = self.config['database']
+
         TABLE = (
             'CREATE TABLE answer_table ('
             '   question_no int NOT NULL AUTO_INCREMENT PRIMARY KEY,'
@@ -24,8 +24,9 @@ class AnswerTable:
             '   answer varchar(256) NOT NULL'
             ')'
         )
-        conn = self.cnx;
+        conn = self.cnx
         cursor = conn.cursor(buffered=True)
+
         try: 
             cursor.execute( 
                 'CREATE DATABASE {}'.format(DB_NAME)
@@ -54,13 +55,17 @@ class AnswerTable:
         conn.commit()
         cursor.close()
 
-    def read_answers(self, question_num):
-        cursor = self.cnx.cursor()
-        query = 'SELECT answer from answer_table WHERE question = %s'
-        question = (question_num,)
+    def read_answers(self, question):
+        conn = self.cnx
+        cursor = conn.cursor()
+        query = (
+            'SELECT question_no, answer from answer_table WHERE question = %s'
+        )
+        question = (question,)
         cursor.execute(query, question)
-        for answer in cursor: 
-            print(answer)
+        answers = cursor.fetchall()
+        return answers[0]
+
 
 class GameTable:
     def __init__(self, **config):
@@ -74,7 +79,6 @@ class GameTable:
                 print("Database does not exist")
             else:
                 print(err)
-        self.create_table()
 
     def create_table(self):
         DB_NAME = self.config['database']
@@ -138,7 +142,22 @@ class GameTable:
             data = (username, 1)
             cursor.execute(insert_query, data)
             conn.commit()
-        
+    
+    def check_score(self, username):
+        conn = self.cnx
+        cursor = conn.cursor(buffered=True)
+        check_query = (
+            'SELECT correct_ans FROM game_table WHERE '
+            'username = %s'
+        )
+        data =  (username,)
+        cursor.execute(check_query, data)
+        check = cursor.fetchall()
+        if check:
+            return check[0][0]
+        else: 
+            return 0
+
 class UserTable:
     def __init__(self, **config):
         self.config = config
@@ -151,7 +170,6 @@ class UserTable:
                 print("Database does not exist")
             else:
                 print(err)
-        self.create_table()
 
     def create_table(self):
         DB_NAME = self.config['database']
@@ -224,9 +242,7 @@ if __name__ == '__main__':
         'four' : 4
     }
     ans_schema.create_table(**q_ans)
-    ans_schema.read_answers('1')
-    game_table = GameTable(**config)
-    user_table = UserTable(**config)
+
     print(user_table.query_user('Nikesh15', '9807'))
     game_table.add_new_entry('Abi')
     #game_table.add_new_entry('Abi')
