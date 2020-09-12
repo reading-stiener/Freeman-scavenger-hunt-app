@@ -6,7 +6,7 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 from markupsafe import escape
 from database_connection import AnswerTable, UserTable, GameTable
-from game_logic import handle_answer, handle_login, handle_signups
+from game_logic import handle_question, handle_answer, handle_login, handle_signups
 from datetime import timedelta
 
 # Set the secret key to some random bytes. Keep this really secret!
@@ -17,13 +17,12 @@ app.permanent_session_lifetime = timedelta(minutes=20)
 @app.route('/')
 def index():
     if 'username' in session:
-        return 'Logged in as %s' % escape(session['username'])
-    return 'You are not logged in.'
+        return render_template('index.html', username=session['username'])
+    return render_template('index.html', username=None)
 
 # Route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
     if request.method == 'POST':
         username, password = request.form['username'], request.form['password']
         session.permanent = True
@@ -32,7 +31,19 @@ def login():
             return redirect(url_for('index'))
         else:
             return redirect(url_for('index'))
-    return render_template('login.html', error=error)
+    return render_template('login.html', action='sign in')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username, password = request.form['username'], request.form['password']
+        session.permanent = True
+        if handle_signups(username, password):
+            session['username'] = username
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
+    return render_template('login.html', action='sign up')
 
 @app.route('/logout')
 def logout():
@@ -42,14 +53,18 @@ def logout():
 
 # Route for the handling the questions page for a user
 @app.route('/question', methods=['GET', 'POST'])
-def question(): 
-    error = None
+def question():
+    question = request.args.get('question')
+    user = session['username']
+    check = handle_question(user, question, session)
     if request.method == 'POST':
-        ans = request.form['answer']
-        question = request.args.get('question')
-        user = request.args.get('user')
-        return handle_answer(ans, question, user)
-    return render_template('question.html', error=error)
+        user_ans = request.form['answer']
+        ans = session['ans']
+        if handle_answer(ans, user_ans, user):
+            return "Awesome. You go it"
+        else: 
+            return "Wrong answer"
+    return render_template('question.html', check=check)
 
 if __name__ == '__main__':
     config = {

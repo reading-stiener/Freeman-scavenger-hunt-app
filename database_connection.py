@@ -139,7 +139,7 @@ class GameTable:
                 'INSERT INTO game_table (username, correct_ans) '
                 'VALUES (%s, %s)'
             )
-            data = (username, 1)
+            data = (username, 0)
             cursor.execute(insert_query, data)
             conn.commit()
     
@@ -227,6 +227,7 @@ class UserTable:
         user_data = (username, password)
         cursor.execute(insert_query, user_data)
         conn.commit()
+        return True
 
 if __name__ == '__main__':
     config = {

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+  <title>Home Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Freeman Scavenger Hunt. Let's see how far you make it!</h1>
+    
+    {% if username %}
+      <p ><strong> Hello {{username}}. Glad you made it. Here is the question. </strong> {{ error }}
+
+    {%else%}
+      <p><strong> You are not logged in.  </strong></p> 
+      <p><a href="{{ url_for('login') }}">Sign In</a> </p>
+      <p><a href="{{ url_for('signup') }}">Sign Up</a> </p>
+    {% endif %}
+  </div>
+</body>
+</html>
