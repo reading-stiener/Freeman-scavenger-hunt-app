@@ -4,7 +4,6 @@
 
 #Importing Modules
 from flask import Flask, render_template, redirect, url_for, request, session
-from markupsafe import escape
 from database_connection import AnswerTable, UserTable, GameTable
 from game_logic import handle_question, handle_answer, handle_login, handle_signups, answer_count
 from datetime import timedelta
@@ -80,7 +79,14 @@ def question():
 # Route for response
 @app.route('/response')
 def response():
-    return render_template('response.html')
+    response = request.args.get('response', None)
+    return render_template('response.html', response=response)
+
+# Route for hints
+@app.route('/hint')
+def hint():
+    n_question = session.get('answer_count', None)
+    return render_template('hint.html', question=n_question+1)
 
 if __name__ == '__main__':
     config = {
@@ -102,4 +108,4 @@ if __name__ == '__main__':
     game_table.create_table()
     user_table = UserTable(**config)
     user_table.create_table()
-    app.run(debug=True)
+    app.run()
