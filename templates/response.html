@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+  <title>Question page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+  <div class="container">
+    {% if response == 'correct' %}
+        <p><strong>Awesome job! You got this. </strong> </p>
+    {% elif response == 'wrong' %}
+        <p><strong>Wrong answer. Scan the QR code to try again. </strong> </p>
+    {% else %}
+        <p><strong>You are lost. Find the right QR code and try again. </strong> </p>
+    {% endif %}
+  </div>
+</body>
+</html>

@@ -6,7 +6,7 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 from markupsafe import escape
 from database_connection import AnswerTable, UserTable, GameTable
-from game_logic import handle_question, handle_answer, handle_login, handle_signups
+from game_logic import handle_question, handle_answer, handle_login, handle_signups, answer_count
 from datetime import timedelta
 
 # Set the secret key to some random bytes. Keep this really secret!
@@ -17,7 +17,12 @@ app.permanent_session_lifetime = timedelta(minutes=20)
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('index.html', username=session['username'])
+        session['answer_count'] = answer_count(session['username'])
+        return render_template(
+            'index.html', 
+            username=session['username'], 
+            answer_count=session['answer_count']
+        )
     return render_template('index.html', username=None)
 
 # Route for handling the login page logic
@@ -55,16 +60,27 @@ def logout():
 @app.route('/question', methods=['GET', 'POST'])
 def question():
     question = request.args.get('question')
-    user = session['username']
+    user = session.get('username', None)
+    if not user: 
+        return render_template('index.html', username=None)
     check = handle_question(user, question, session)
-    if request.method == 'POST':
-        user_ans = request.form['answer']
-        ans = session['ans']
-        if handle_answer(ans, user_ans, user):
-            return "Awesome. You go it"
+    if check:
+        if request.method == 'POST':
+            user_ans = request.form['answer']
+            ans = session['ans']
+            if handle_answer(ans, user_ans, user):
+                return redirect(url_for('response', response='correct'))
+            else: 
+                return redirect(url_for('response', response='wrong'))
         else: 
-            return "Wrong answer"
-    return render_template('question.html', check=check)
+            return render_template('question.html')
+    else:        
+        return redirect(url_for('response', response='lost'))
+
+# Route for response
+@app.route('/response')
+def response():
+    return render_template('response.html')
 
 if __name__ == '__main__':
     config = {

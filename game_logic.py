@@ -16,6 +16,8 @@ def handle_signups(username, password):
     user_table = UserTable(**config)
     game_table = GameTable(**config)
     game_table.add_new_entry(username)
+    if user_table.query_user(username, password): 
+        return False
     return user_table.add_user(username, password)
 
 def handle_question(user, question, session):
@@ -44,6 +46,11 @@ def handle_answer(ans, user_ans, user):
         return True
     else:
         return False
+
+def answer_count(user): 
+    game_table = GameTable(**config)
+    score = game_table.check_score(user)
+    return score
 
 if __name__ == '__main__':
     request = { 

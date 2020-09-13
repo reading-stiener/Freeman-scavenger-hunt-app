@@ -9,7 +9,9 @@
     <h1>Welcome to Freeman Scavenger Hunt. Let's see how far you make it!</h1>
     
     {% if username %}
-      <p ><strong> Hello {{username}}. Glad you made it. Here is the question. </strong> {{ error }}
+      <p ><strong> Hello {{username}}. Glad you made it. Scan the QR code and we'll redirect to the question. </strong></p>
+      <p><strong>Questions answered: {{answer_count}} </strong></p>
+      <p><a href="{{ url_for('logout') }}">Log out</a> </p>
 
     {%else%}
       <p><strong> You are not logged in.  </strong></p> 
