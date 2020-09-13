@@ -86,7 +86,7 @@ def response():
 @app.route('/hint')
 def hint():
     n_question = session.get('answer_count', None)
-    return render_template('hint.html', question=n_question+1)
+    return render_template('hint.html', question=n_question)
 
 if __name__ == '__main__':
     config = {
