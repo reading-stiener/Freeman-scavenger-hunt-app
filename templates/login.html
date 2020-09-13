@@ -1,24 +1,98 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Login page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+	<title>Contact V4</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename = 'images/icons/favicon.ico') }}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'vendor/bootstrap/css/bootstrap.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'vendor/animate/animate.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'vendor/css-hamburgers/hamburgers.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'vendor/animsition/css/animsition.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'vendor/select2/select2.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'vendor/daterangepicker/daterangepicker.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css') }}">
+<!--===============================================================================================-->
 </head>
 <body>
-  <div class="container">
-    <h1>Please login</h1>
-    <br>
-    <form action="" method="post">
-      <input type="text" placeholder="Username" name="username" value="{{
-        request.form.username }}">
-      <input type="password" placeholder="Password" name="password" value="{{
-        request.form.password }}">
-      {% if action == 'sign in' %}
-        <input class="btn btn-default" type="submit" value="Sign in">
-      {% else %}
-        <input class="btn btn-default" type="submit" value="Sign up">
-      {% endif %}
-    </form>
-  </div>
+
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" action="" method="post">
+				<span class="contact100-form-title">
+					Welcome to our Freeman Scavenger Hunt!
+				</span>
+				
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<span class="label-input100"> Your Username</span>
+					<input class="input100" type="text" name="name" placeholder="Enter your name" value="{{
+						request.form.username }}">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: nghimir1@conncoll.edu">
+					<span class="label-input100">Password</span>
+					<input class="input100" type="text" name="email" placeholder="Enter your password" value="{{
+						request.form.password }}">
+					<span class="focus-input100"></span>
+				</div>
+
+				
+
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn">
+							<span>
+								{% if action == 'sign in' %}
+									Sign In
+								{% else %}
+									Sign Up
+								{% endif %}
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+				</div>
+
+				
+					<!-- <input class="btn btn-default" type="submit" value="Sign in">
+				
+					<input class="btn btn-default" type="submit" value="Sign up"> -->
+				
+
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
 </body>
 </html>
