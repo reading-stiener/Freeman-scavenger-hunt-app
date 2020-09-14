@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<head>
-  <title>Hint</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
+
+{% extends 'base.html' %} 
+
+{% block content %}
+{{num}}
+{% if num == "SQRF"%}
+<p>Helloi</p>
+{% else %}
+<p> You're lost</p>
+{% endif %}
   <div class="container">
-    <h1>Hint for the next riddle spot {{question}}</h1> 
+  <h1>Hint for the next riddle spot {{question}}</h1> 
   </div>
   <p><a href="{{ url_for('index') }}">Home Page</a></p>
-</body>
-</html>
+
+
+{% endblock %}

@@ -5,7 +5,7 @@
 #Importing Modules
 from flask import Flask, render_template, redirect, url_for, request, session
 from database_connection import AnswerTable, UserTable, GameTable
-from game_logic import handle_question, handle_answer, handle_login, handle_signups, answer_count
+from game_logic import handle_question, handle_answer, handle_login, handle_signups, answer_count, ans2str
 from datetime import timedelta
 
 # Set the secret key to some random bytes. Keep this really secret!
@@ -17,11 +17,16 @@ app.permanent_session_lifetime = timedelta(minutes=20)
 def index():
     if 'username' in session:
         session['answer_count'] = answer_count(session['username'])
+        ans_count = answer_count(session['username'])
+        prev = getPrev()
+        # qLast = qLast[]
         return render_template(
             'index.html', 
             username=session['username'], 
-            answer_count=session['answer_count']
+            ans_count=session['answer_count'],
         )
+
+
     return render_template('index.html', username=None)
 
 # Route for handling the login page logic
@@ -58,9 +63,10 @@ def logout():
 # Route for the handling the questions page for a user
 @app.route('/question', methods=['GET', 'POST'])
 def question():
-    question = request.args.get('question')
+    question = request.args.get('question', None)
     user = session.get('username', None)
     if not user: 
+        remember(request.args.get('question'))
         return render_template('index.html', username=None)
     check = handle_question(user, question, session)
     if check:
@@ -72,9 +78,19 @@ def question():
             else: 
                 return redirect(url_for('response', response='wrong'))
         else: 
-            return render_template('question.html')
+            return render_template('question.html', num = question)
     else:        
         return redirect(url_for('response', response='lost'))
+
+# def remember(string_url):
+#     global prev
+#     print('before', prev)
+#     prev = string_url
+#     print('after', prev)
+
+# def getPrev():
+#     global prev
+#     return prev
 
 # Route for response
 @app.route('/response')
@@ -86,7 +102,8 @@ def response():
 @app.route('/hint')
 def hint():
     n_question = session.get('answer_count', None)
-    return render_template('hint.html', question=n_question+1)
+    q_count = answer_count(session['username'])
+    return render_template('hint.html', question=q_count+1)
 
 if __name__ == '__main__':
     config = {
@@ -98,14 +115,20 @@ if __name__ == '__main__':
     } 
     ans_schema = AnswerTable(**config)
     q_ans ={ 
-        'one' : 1,
-        'two' : 2, 
-        'three' : 3,
-        'four' : 4
+        'SQRF' : 11,
+        'CBRF' : 4, 
+        'PLRF' : 20,
+        'BXRF' : 3,
+        'CSRF' : 4,
+        'TBRF' : 'water',
+        'TFRF' : 3,
+        'CLRF' : 'november',
+        'GMRF' : 5,
+        'GGRF' : 3
     }
     ans_schema.create_table(**q_ans)
     game_table = GameTable(**config)
     game_table.create_table()
     user_table = UserTable(**config)
     user_table.create_table()
-    app.run()
+    app.run(debug=True)

@@ -33,7 +33,7 @@ def handle_question(user, question, session):
     score = game_table.check_score(user)
     
     # check if user is at the right spot
-    if question_no == score+1:
+    if question_no <= score+1:
         return True
     else:
         return False
@@ -52,10 +52,15 @@ def answer_count(user):
     score = game_table.check_score(user)
     return score
 
+
+def ans2str(i):
+    temp_lst = ['SQRF', 'CBRF', 'PLRF', 'BXRF', 'CSRF', 'TBRF', 'TFRF', 'CLRF', 'GMRF', 'GGRF']
+    return temp_lst[1]
+
 if __name__ == '__main__':
     request = { 
         'answer' : 1
     }
     question = 'one'
-    user = 'NIk'
+    user = 'Nik'
     print(handle_answer(request, question, user))

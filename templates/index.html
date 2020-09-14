@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V4</title>
+	<title>Login Page</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -22,57 +22,96 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'vendor/daterangepicker/daterangepicker.css') }}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/util.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css') }}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!--===============================================================================================-->
 </head>
 <body>
 
+<body>
+ 
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form" action="" method="post">
 				<span class="contact100-form-title">
-					Welcome to our Freeman Scavenger Hunt!
-				</span>
+					Welcome to Freeman Scavenger Hunt!
+				</span>	
 				
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100"> Your Username</span>
-					<input class="input100" type="text" name="username" placeholder="Enter your name" value="{{
-						request.form.username }}">
-					<span class="focus-input100"></span>
-				</div>
+				{% if username %}
 
-				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: nghimir1@conncoll.edu">
-					<span class="label-input100">Password</span>
-					<input class="input100" type="password" name="password" placeholder="Enter your password" value="{{
-						request.form.password }}">
-					<span class="focus-input100"></span>
-				</div>
-
-				
-
-				<div class="container-contact100-form-btn">
+				<p ><strong> Hello {{username}}.  </strong></p>
+				<p><strong>Questions answered: {{ans_count}} </strong></p>
+				<!-- <p><a href="{{ url_for('hint') }}">Hint</a> </p> -->
+        <p> </p>
+        <div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
+            <a href="{{ url_for('hint') }}">
 						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn">
-							<span>
-								{% if action == 'sign in' %}
-									Sign In
-								{% else %}
-									Sign Up
-								{% endif %}
-								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-							</span>
-						</button>
+            <p  style="text-align: center;font-size: 20px; color: white;padding-top: 15px;">	<span>	
+              Hint
+              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+            </span> </p>
+						</a>
+					</div>
+        </div>
+        <div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+            <a href="{{ url_for('question', question=prev) }}">
+						<div class="contact100-form-bgbtn"></div>
+            <p  style="text-align: center;font-size: 20px; color: white;padding-top: 15px;">	<span>	
+              Continue Next Question
+              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+            </span> </p>
+						</a>
 					</div>
 				</div>
-
-				
-					<!-- <input class="btn btn-default" type="submit" value="Sign in">
-				
-					<input class="btn btn-default" type="submit" value="Sign up"> -->
-				
-
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+            <a href="{{ url_for('logout') }}">
+						<div class="contact100-form-bgbtn"></div>
+            <p  style="text-align: center;font-size: 20px; color: white;padding-top: 15px;">	<span>	
+            Log Out					
+              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+            </span> </p>
+						</a>
+					</div>
+				</div>	
+				{% else %}			
+				<p  style="text-align: center;"><strong> You are not logged in.  </strong></p>
+				<div class="container-contact100-form-btn">
+           
+            <div class="wrap-contact100-form-btn">
+           
+              <a href="{{ url_for('login') }}">
+                <div class="contact100-form-bgbtn"></div>
+                <p  style="text-align: center;font-size: 20px; color: white;padding-top: 15px;">	<span>	
+                  Sign In					
+                  <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                </span> </p>
+             
+              
+            </a>	
+              
+            </div>
+						
+				</div>
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+           
+            <a href="{{ url_for('signup') }}">
+              <div class="contact100-form-bgbtn"></div>
+              <p  style="text-align: center;font-size: 20px; color: white; padding-top: 15px;">	<span>	
+                Sign Up					
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span> </p>
+           
+						
+          </a>	
+						
+					</div>
+        </div>
+        {% endif %}
 			</form>
 		</div>
 	</div>
