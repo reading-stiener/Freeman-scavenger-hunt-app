@@ -98,6 +98,12 @@ def response():
     response = request.args.get('response', None)
     return render_template('response.html', response=response)
 
+@app.route('/final')
+def final():
+    # final = request.args.get('final', None)
+    return render_template('final.html')
+
+
 # Route for hints
 @app.route('/hint')
 def hint():
