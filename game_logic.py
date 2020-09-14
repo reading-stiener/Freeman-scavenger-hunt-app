@@ -23,20 +23,27 @@ def handle_signups(username, password):
 def handle_question(user, question, session):
     # pull the answer out
     ans_table = AnswerTable(**config)
-    question_no, ans = ans_table.read_answers(question)
+    table_check = ans_table.read_answers(question)
     
-    # saving ans in session. Not sure if this is a good idea 
-    session['ans'] = ans
+    if table_check: 
+        question_no, ans = table_check
+    
+        # saving ans in session. Not sure if this is a good idea 
+        session['ans'] = ans
 
-    # check if the user is on the right page
-    game_table = GameTable(**config)
-    score = game_table.check_score(user)
-    
-    # check if user is at the right spot
-    if question_no <= score+1:
-        return True
-    else:
-        return False
+        # check if the user is on the right page
+        game_table = GameTable(**config)
+        score = game_table.check_score(user)
+        
+        # check if user is at the right spot.
+        if question_no == score+1:
+            return 'right_spot'
+        elif question_no < score+1:
+            return 'already_visited'
+        else:    
+            return 'wrong_spot'
+    else: 
+        return 'wrong spot'
 
 def handle_answer(ans, user_ans, user):
     game_table = GameTable(**config)
@@ -53,9 +60,24 @@ def answer_count(user):
     return score
 
 
-def ans2str(i):
-    temp_lst = ['SQRF', 'CBRF', 'PLRF', 'BXRF', 'CSRF', 'TBRF', 'TFRF', 'CLRF', 'GMRF', 'GGRF']
-    return temp_lst[1]
+# def ans2str(ans_count):
+#     temp_lst = ['SQRF', 'CBRF', 'PLRF', 'BXRF', 'CSRF', 'TBRF', 'TFRF', 'CLRF', 'GMRF', 'GGRF']
+#     return temp_lst[ans_count-1]
+
+# def str2ans(q_str):
+#     q_dict = { 
+#         'SQRF' : 1,
+#         'CBRF' : 2, 
+#         'PLRF' : 3,
+#         'BXRF' : 4,
+#         'CSRF' : 5,
+#         'TBRF' : 6,
+#         'TFRF' : 7,
+#         'CLRF' : 8,
+#         'GMRF' : 9, 
+#         'GGRF' : 10
+#     } 
+
 
 if __name__ == '__main__':
     request = { 

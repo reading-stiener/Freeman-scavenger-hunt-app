@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V4</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -49,28 +49,59 @@
 					<span class="focus-input100"></span>
 				</div>
 
-				
+				{% if action == 'sign in' %}
+				<div class="container-contact100-form-btn">           
+						<div class="wrap-contact100-form-btn"> 
+							<span>        
+							<button>
+								<div class="contact100-form-bgbtn"></div>
+								<p  style="padding-left: 5px;font-size: 20px; color: white;padding-top: 15px;">		
+								Sign In					
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+								 </p>  
+							
+							</button>	
+						</span>
+						</div>
+										
+				</div>
 
+				{% else %}
+
+				<div class="container-contact100-form-btn">           
+							<div class="wrap-contact100-form-btn">           
+								<button>
+								<div class="contact100-form-bgbtn"></div>
+								<p  style="text-align: center;font-size: 20px; color: white;padding-top: 15px;">	<span>	
+								Sign Up					
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+								</span> </p>  
+							
+							</button>	
+							
+						</div>
+										
+				</div>
+				{% endif %}
+							  
+<!--
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
 						<button class="contact100-form-btn">
+							<p style="text-align: center;font-size: 20px; color: white;">
 							<span>
 								{% if action == 'sign in' %}
-									Sign In
+								Sign In
 								{% else %}
-									Sign Up
+								Sign Up
 								{% endif %}
-								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 							</span>
+							</p>
 						</button>
 					</div>
 				</div>
-
-				
-					<!-- <input class="btn btn-default" type="submit" value="Sign in">
-				
-					<input class="btn btn-default" type="submit" value="Sign up"> -->
+-->
 				
 
 			</form>

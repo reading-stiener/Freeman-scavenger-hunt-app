@@ -5,7 +5,7 @@
 #Importing Modules
 from flask import Flask, render_template, redirect, url_for, request, session
 from database_connection import AnswerTable, UserTable, GameTable
-from game_logic import handle_question, handle_answer, handle_login, handle_signups, answer_count, ans2str
+from game_logic import handle_question, handle_answer, handle_login, handle_signups, answer_count
 from datetime import timedelta
 
 # Set the secret key to some random bytes. Keep this really secret!
@@ -17,16 +17,11 @@ app.permanent_session_lifetime = timedelta(minutes=20)
 def index():
     if 'username' in session:
         session['answer_count'] = answer_count(session['username'])
-        ans_count = answer_count(session['username'])
-        prev = getPrev()
-        # qLast = qLast[]
         return render_template(
             'index.html', 
             username=session['username'], 
             ans_count=session['answer_count'],
         )
-
-
     return render_template('index.html', username=None)
 
 # Route for handling the login page logic
@@ -63,34 +58,37 @@ def logout():
 # Route for the handling the questions page for a user
 @app.route('/question', methods=['GET', 'POST'])
 def question():
-    question = request.args.get('question', None)
+    q_string = request.args.get('question', None)
     user = session.get('username', None)
     if not user: 
-        remember(request.args.get('question'))
         return render_template('index.html', username=None)
-    check = handle_question(user, question, session)
-    if check:
+    check = handle_question(user, q_string, session)
+    if check == 'right_spot':
         if request.method == 'POST':
             user_ans = request.form['answer']
             ans = session['ans']
             if handle_answer(ans, user_ans, user):
+                if session.get('answer_count', None): 
+                    session['answer_count'] +=1
+                if session['answer_count'] == 10: 
+                    return redirect(url_for('final'))
                 return redirect(url_for('response', response='correct'))
             else: 
                 return redirect(url_for('response', response='wrong'))
         else: 
-            return render_template('question.html', num = question)
+            return render_template('question.html', num = q_string)
+    elif check == 'already_visited': 
+        if request.method == 'POST': 
+            return redirect(url_for('visited'))
+        else: 
+            return render_template('question.html', num = q_string)
     else:        
         return redirect(url_for('response', response='lost'))
 
-# def remember(string_url):
-#     global prev
-#     print('before', prev)
-#     prev = string_url
-#     print('after', prev)
-
-# def getPrev():
-#     global prev
-#     return prev
+# Route for already visited
+@app.route('/visited')
+def visited():
+    return render_template('visited.html')
 
 # Route for response
 @app.route('/response')
@@ -100,16 +98,14 @@ def response():
 
 @app.route('/final')
 def final():
-    # final = request.args.get('final', None)
     return render_template('final.html')
 
 
 # Route for hints
 @app.route('/hint')
 def hint():
-    n_question = session.get('answer_count', None)
-    q_count = answer_count(session['username'])
-    return render_template('hint.html', question=q_count+1)
+    q_solved = session.get('answer_count', None)
+    return render_template('hint.html', question=q_solved+1)
 
 if __name__ == '__main__':
     config = {

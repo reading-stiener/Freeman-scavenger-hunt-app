@@ -2,16 +2,65 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-{{num}}
-{% if num == "SQRF"%}
-<p>Helloi</p>
-{% else %}
-<p> You're lost</p>
-{% endif %}
+
   <div class="container">
-  <h1>Hint for the next riddle spot {{question}}</h1> 
+  <h1 style="text-align: center;">Hint: spot {{question}}</h1> 
   </div>
-  <p><a href="{{ url_for('index') }}">Home Page</a></p>
 
+  <div> 
+    {%if question == 1%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      It’s time to unpacman.
+    </span> </p>
+    {%elif question == 2%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      Who’s compiling a Spotify playlist again?
+    </span> </p>
+    {%elif question == 3%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      I need to go to Switzerland. Whose door do I knock? 
+    </span> </p>
+    {%elif question == 4%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      I wonder if Hiram got his plant back.. Let’s check in once.
+    </span> </p>
+    {%elif question == 5%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      I would love to sit down and stare at the Freeman green.
+    </span> </p>
+    {%elif question == 6%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      Need to chat with 'A bee'. Whose door should I knock?
+    </span> </p>
+    {%elif question == 7%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      I wonder who’s the floor gov at fourth?
+    </span> </p>
+    {%elif question == 8%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      I wonder what the highest point in freeman is.
+    </span> </p>
+    {%elif question == 9%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      Time to go to class.
+    </span> </p>
+    {%elif question == 10%}
+    <p style="text-align: center;font-size: 20px; color: black;padding-top: 15px;">	<span>	
+      It seems that we all moved in the same way.
+    </span> </p>
 
+    {%endif%}
+  </div>
+
+  <div class="container-contact100-form-btn">
+    <div class="wrap-contact100-form-btn">
+      <a href="{{ url_for('index') }}" style="text-align: center;font-size: 20px; color: white;">
+      <div class="contact100-form-bgbtn"></div>
+        <p style="text-align: center;font-size: 20px; color: white;padding-top: 15px;">	<span>	
+        Home Page
+      </span> </p>
+      </a>
+    </div>
+  </div>
+  
 {% endblock %}

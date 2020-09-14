@@ -64,7 +64,10 @@ class AnswerTable:
         question = (question,)
         cursor.execute(query, question)
         answers = cursor.fetchall()
-        return answers[0]
+        if answers: 
+            return answers[0]
+        else: 
+            return None
 
 
 class GameTable:

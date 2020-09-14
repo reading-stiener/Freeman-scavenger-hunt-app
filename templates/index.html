@@ -42,8 +42,25 @@
 
 				<p ><strong> Hello {{username}}.  </strong></p>
 				<p><strong>Questions answered: {{ans_count}} </strong></p>
+				<p><strong>Scan the QR code with your camera. </strong></p>
 				<!-- <p><a href="{{ url_for('hint') }}">Hint</a> </p> -->
-        <p> </p>
+		<p> </p>
+
+		<!-- 
+		<div class="container-contact100-form-btn">
+			<div class="wrap-contact100-form-btn">
+				<div class="contact100-form-bgbtn"></div>
+				<p  style="text-align: center;font-size: 20px; color: white;padding-top: 15px;">	<span>	
+	  				Scan the QR code to continue
+	 				<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i> 
+				</span> </p>
+			
+			</div>
+		</div>
+
+		-->
+	
+
         <div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
             <a href="{{ url_for('hint') }}">
@@ -55,17 +72,7 @@
 						</a>
 					</div>
         </div>
-        <div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-            <a href="{{ url_for('question', question=prev) }}">
-						<div class="contact100-form-bgbtn"></div>
-            <p  style="text-align: center;font-size: 20px; color: white;padding-top: 15px;">	<span>	
-              Continue Next Question
-              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-            </span> </p>
-						</a>
-					</div>
-				</div>
+    
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
             <a href="{{ url_for('logout') }}">
