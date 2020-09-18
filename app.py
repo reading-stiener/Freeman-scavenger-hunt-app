@@ -20,7 +20,7 @@ def index():
         return render_template(
             'index.html', 
             username=session['username'], 
-            answer_count=session['answer_count']
+            ans_count=session['answer_count'],
         )
     return render_template('index.html', username=None)
 
@@ -58,23 +58,37 @@ def logout():
 # Route for the handling the questions page for a user
 @app.route('/question', methods=['GET', 'POST'])
 def question():
-    question = request.args.get('question')
+    q_string = request.args.get('question', None)
     user = session.get('username', None)
     if not user: 
         return render_template('index.html', username=None)
-    check = handle_question(user, question, session)
-    if check:
+    check = handle_question(user, q_string, session)
+    if check == 'right_spot':
         if request.method == 'POST':
             user_ans = request.form['answer']
             ans = session['ans']
             if handle_answer(ans, user_ans, user):
+                if session.get('answer_count', None): 
+                    session['answer_count'] +=1
+                if session['answer_count'] == 10: 
+                    return redirect(url_for('final'))
                 return redirect(url_for('response', response='correct'))
             else: 
                 return redirect(url_for('response', response='wrong'))
         else: 
-            return render_template('question.html')
+            return render_template('question.html', num = q_string)
+    elif check == 'already_visited': 
+        if request.method == 'POST': 
+            return redirect(url_for('visited'))
+        else: 
+            return render_template('question.html', num = q_string)
     else:        
         return redirect(url_for('response', response='lost'))
+
+# Route for already visited
+@app.route('/visited')
+def visited():
+    return render_template('visited.html')
 
 # Route for response
 @app.route('/response')
@@ -82,11 +96,16 @@ def response():
     response = request.args.get('response', None)
     return render_template('response.html', response=response)
 
+@app.route('/final')
+def final():
+    return render_template('final.html')
+
+
 # Route for hints
 @app.route('/hint')
 def hint():
-    n_question = session.get('answer_count', None)
-    return render_template('hint.html', question=n_question)
+    q_solved = session.get('answer_count', None)
+    return render_template('hint.html', question=q_solved+1)
 
 if __name__ == '__main__':
     config = {
@@ -98,10 +117,16 @@ if __name__ == '__main__':
     } 
     ans_schema = AnswerTable(**config)
     q_ans ={ 
-        'one' : 1,
-        'two' : 2, 
-        'three' : 3,
-        'four' : 4
+        'SQRF' : 11,
+        'CBRF' : 4, 
+        'PLRF' : 20,
+        'BXRF' : 3,
+        'CSRF' : 4,
+        'TBRF' : 'water',
+        'TFRF' : 3,
+        'CLRF' : 'november',
+        'GMRF' : 5,
+        'GGRF' : 3
     }
     ans_schema.create_table(**q_ans)
     game_table = GameTable(**config)

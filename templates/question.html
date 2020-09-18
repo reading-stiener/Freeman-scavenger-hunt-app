@@ -1,18 +1,300 @@
-<!DOCTYPE html>
-<head>
-  <title>Question page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-  <div class="container">
-    <h1>Question </h1>
-    <br>
-    <form action="" method="post">
-      <input type="text" placeholder="Answer" name="answer" value="{{
-        request.form.answer }}">
-      <input class="btn btn-default" type="submit" value="Lets go!">
-    </form>
+{% extends 'base.html' %} 
+{{num}}
+{% block title %}Puzzle {{num}} {% endblock %}
+
+{% block content %}
+{% if num == 'SQRF' %}
+<p style="font-size:24px;">This board has 12 dots on it. Your task is to connect these dots to form as many squares as possible.
+  <br>
+  <br>
+  You can use each dot multiple times, and you can orient the squares however you wish to fit them on the board.
+  However, to be counted as a square, each corner must be on a dot.
+<br>
+<br>
+  How many different squares can be drawn on the board?
+</p>
+<img src="{{url_for('static', filename='images/img_1_q.png')}}" align="middle" class="center"/>
+<form action="" method="post">
+    <div class="wrap-input100 validate-input">
+  <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+    request.form.answer }}">
+  <span class="focus-input100"></span>
+</div>
+  <div class="container-contact100-form-btn">
+    <div class="wrap-contact100-form-btn">
+      <div class="contact100-form-bgbtn"></div>
+  
+      <button class="contact100-form-btn">
+        <span>
+        Let's Go
+          <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+        </span>
+      </button>
+      
+    </div>
   </div>
-</body>
-</html>
+  </form> 
+  {% elif num == 'CBRF' %}
+  <p style="font-size:24px;">You want to create a cube out of metal wiring using the fewest number of wires possible.
+
+    You can bend each wire as many times as you like, but no portion of the cube can have more than one length of wire running over the same edge. Don't worry about how one wire will connect to the next, because you'll use a soldering iron later on.
+    
+    What is the fewest number of wires required to complete the task described above?    
+  </p>
+  <img src="{{url_for('static', filename='images/img_2_q.png')}}" align="middle"  class="center" />
+  <form action="" method="post">
+      <div class="wrap-input100 validate-input">
+    <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+      request.form.answer }}">
+    <span class="focus-input100"></span>
+  </div>
+    <div class="container-contact100-form-btn">
+      <div class="wrap-contact100-form-btn">
+        <div class="contact100-form-bgbtn"></div>
+    
+        <button class="contact100-form-btn">
+          <span>
+          Let's Go
+            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+          </span>
+        </button>
+        
+      </div>
+    </div>
+    </form> 
+
+    {% elif num == 'PLRF' %}
+    <p style="font-size:24px;">You have at your disposal a large number of tiles like the one shown below.
+
+      If you were to take these tiles and try to make a square, what is the fewest number of tiles you'd need?
+      
+    </p>
+    <img src="{{url_for('static', filename='images/img_3_q.png')}}" align="middle" class="center" />
+    <form action="" method="post">
+        <div class="wrap-input100 validate-input">
+      <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+        request.form.answer }}">
+      <span class="focus-input100"></span>
+    </div>
+      <div class="container-contact100-form-btn">
+        <div class="wrap-contact100-form-btn">
+          <div class="contact100-form-bgbtn"></div>
+      
+          <button class="contact100-form-btn">
+            <span>
+            Let's Go
+              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+            </span>
+          </button>
+          
+        </div>
+      </div>
+      </form> 
+      {% elif num == 'BXRF' %}
+      <p style="font-size:24px;">In preparation for your big move, you've packed your belongings into 20 boxes and arranged them as shown below. With everything packed, you are now ready to label each box with its contents. In order to do so, though, you'll need to move a few boxes around.
+
+        How many of the boxes can't be labeled without rearranging the stacks?
+        
+      </p>
+      <img src="{{url_for('static', filename='images/img_4_q.png')}}" align="middle" class="center" />
+      <form action="" method="post">
+          <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+          request.form.answer }}">
+        <span class="focus-input100"></span>
+      </div>
+        <div class="container-contact100-form-btn">
+          <div class="wrap-contact100-form-btn">
+            <div class="contact100-form-bgbtn"></div>
+        
+            <button class="contact100-form-btn">
+              <span>
+              Let's Go
+                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+              </span>
+            </button>
+            
+          </div>
+        </div>
+        </form> 
+        {% elif num == 'CSRF' %}
+        <p style="font-size:24px;">Several circles and squares are pictured in the diagram below. How many times larger is the area of the blue square when compared to that of the red square? 
+        </p>
+        <img src="{{url_for('static', filename='images/img_5_q.png')}}" align="middle" class="center" />
+        <form action="" method="post">
+            <div class="wrap-input100 validate-input">
+          <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+            request.form.answer }}">
+          <span class="focus-input100"></span>
+        </div>
+          <div class="container-contact100-form-btn">
+            <div class="wrap-contact100-form-btn">
+              <div class="contact100-form-bgbtn"></div>
+          
+              <button class="contact100-form-btn">
+                <span>
+                Let's Go
+                  <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                </span>
+              </button>
+              
+            </div>
+          </div>
+          </form> 
+
+          {% elif num == 'TBRF' %}
+          <p style="font-size:24px;">A tennis ball has rolled its way down into a hole. This particular hole is extremely deep and has a sharp bend in the middle, making the ball impossible to retrieve by hand. To make matters worse, the ground around the hole is made of hard clay, so digging the ball out isn't an option.
+
+            However, you have something incredibly commonplace on hand that you can use to get the ball out. What do you use to get the ball out? Answer in five letters. 
+            
+          </p>
+          <img src="{{url_for('static', filename='images/img_6_q.png')}}" align="middle" class="center"/>
+          <form action="" method="post">
+              <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+              request.form.answer }}">
+            <span class="focus-input100"></span>
+          </div>
+            <div class="container-contact100-form-btn">
+              <div class="wrap-contact100-form-btn">
+                <div class="contact100-form-bgbtn"></div>
+            
+                <button class="contact100-form-btn">
+                  <span>
+                  Let's Go
+                    <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                  </span>
+                </button>
+                
+              </div>
+            </div>
+            </form> 
+
+            {% elif num == 'TFRF' %}
+            <p style="font-size:24px;">One day while you're speaking to two boys of the same family, they tell you:
+              "I have a brother two years older than me."
+              "I have a brother three years older than me."
+              The next day, two boys from the same family tell you:
+              "I have a brother one year younger than me."
+              "I have a brother four years younger than me."
+              What is the minimum number of sons there could possibly be in that family?
+              
+            </p>
+            <img src="{{url_for('static', filename='images/img_7_q.png')}}" align="middle" class="center" />
+            <form action="" method="post">
+                <div class="wrap-input100 validate-input">
+              <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+                request.form.answer }}">
+              <span class="focus-input100"></span>
+            </div>
+              <div class="container-contact100-form-btn">
+                <div class="wrap-contact100-form-btn">
+                  <div class="contact100-form-bgbtn"></div>
+              
+                  <button class="contact100-form-btn">
+                    <span>
+                    Let's Go
+                      <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                  
+                </div>
+              </div>
+              </form> 
+
+              {% elif num == 'CLRF' %}
+              <p style="font-size:24px;">In an average 365-day year, the family in this house burns one bundle of wood per day in the fireplace.
+
+                In the three-month period starting this month, the family will burn three more bundles of wood than in the three-month period after it.
+                
+                From this information alone, can you guess what the current month is?
+                
+                Express your answer as a number
+                
+              </p>
+              <!-- <img src="{{url_for('static', filename='images/img_8_q.png')}}" align="middle" /> -->
+              <form action="" method="post">
+                  <div class="wrap-input100 validate-input">
+                <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+                  request.form.answer }}">
+                <span class="focus-input100"></span>
+              </div>
+                <div class="container-contact100-form-btn">
+                  <div class="wrap-contact100-form-btn">
+                    <div class="contact100-form-bgbtn"></div>
+                
+                    <button class="contact100-form-btn">
+                      <span>
+                      Let's Go
+                        <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                      </span>
+                    </button>
+                    
+                  </div>
+                </div>
+                </form> 
+                {% elif num == 'GMRF' %}
+                <p style="font-size:24px;">Twenty-seven glass boxes have been stacked together to form a cube.
+
+                  Some of the glass boxes have a gemstone inside. Image A shows a view of the cube from above, B shows a view from the side, and C shows a view from the front.
+                  
+                  How many of the boxes contain gems? 
+                  
+                </p>
+                <img src="{{url_for('static', filename='images/img_9_q.png')}}" align="middle" class="center" />
+                <form action="" method="post">
+                    <div class="wrap-input100 validate-input">
+                  <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+                    request.form.answer }}">
+                  <span class="focus-input100"></span>
+                </div>
+                  <div class="container-contact100-form-btn">
+                    <div class="wrap-contact100-form-btn">
+                      <div class="contact100-form-bgbtn"></div>
+                  
+                      <button class="contact100-form-btn">
+                        <span>
+                        Let's Go
+                          <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                      
+                    </div>
+                  </div>
+                  </form> 
+
+                  {% elif num == 'GGRF' %}
+                  <p style="font-size:24px;">Three veteran detectives, A, B, and C, are standing by a first-floor window. Looking at the garden below, they say:
+
+                    A: "That's my daughter and grandchild."
+                    B: "That's my daughter and grandchild."
+                    C: "That's my daughter and grandchild."
+                    
+                    Being hard-boiled detectives, they're all very serious about this. None of them is lying. What is the minimum number of people who need to be in the garden?
+                    
+                  <!-- <img src="{{url_for('static', filename='images/img_10_q.png')}}" align="middle" /> -->
+                  <form action="" method="post">
+                      <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
+                      request.form.answer }}">
+                    <span class="focus-input100"></span>
+                  </div>
+                    <div class="container-contact100-form-btn">
+                      <div class="wrap-contact100-form-btn">
+                        <div class="contact100-form-bgbtn"></div>
+                    
+                        <button class="contact100-form-btn">
+                          <span>
+                          Let's Go
+                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                        
+                      </div>
+                    </div>
+                    </form> 
+    {% else %}
+  <p> You're lost</p>
+{% endif %}
+{% endblock %}
+

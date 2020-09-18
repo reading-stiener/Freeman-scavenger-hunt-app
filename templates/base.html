@@ -1,6 +1,7 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Login</title>
+	<title>Freeman Scavenger Hunt</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -22,86 +23,32 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/util.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css') }}">
+	<style>
+		.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+	</style>
 <!--===============================================================================================-->
 </head>
 <body>
-
-
+	
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form" action="" method="post">
 				<span class="contact100-form-title">
-					Welcome to our Freeman Scavenger Hunt!
-				</span>
-				
-				<div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100"> Your Username</span>
-					<input class="input100" type="text" name="username" placeholder="Enter your name" value="{{
-						request.form.username }}">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: nghimir1@conncoll.edu">
-					<span class="label-input100">Password</span>
-					<input class="input100" type="password" name="password" placeholder="Enter your password" value="{{
-						request.form.password }}">
-					<span class="focus-input100"></span>
-				</div>
-
-				{% if action == 'sign in' %}
-				<div class="container-contact100-form-btn">           
-						<div class="wrap-contact100-form-btn"> 
-							<span>        
-							<button style="text-align: center;">
-								<div class="contact100-form-bgbtn" ></div>
-								<p  style="font-size: 20px; color: white;padding-top: 15px; padding-left: 5.5em; padding-top: 5px;">	<span>			
-								Sign In				
-								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-								</span> </p>  
-							
-							</button>	
-						</span>
-						</div>
-										
-				</div>
-
-				{% else %}
-
-				<div class="container-contact100-form-btn">           
-							<div class="wrap-contact100-form-btn">           
-								<button>
-								<div class="contact100-form-bgbtn"></div>
-								<p  style="font-size: 20px; color: white;padding-top: 15px; padding-left: 5.5em; padding-top: 5px;">	<span>	
-								Sign Up					
-								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-								</span> </p>  
-							
-							</button>	
-							
-						</div>
-										
-				</div>
-				{% endif %}
+					{% block header %}{% endblock %}
+				</span>	
+				{% block content %}
+				{% endblock %}
 			</form>
 		</div>
 	</div>
 
 
 
-	<div id="dropDownSelect1"></div>
-
-<!--===============================================================================================-->
-	
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-23581568-13');
-</script>
-
+<!--===============================================================================================-->    
 </body>
 </html>
