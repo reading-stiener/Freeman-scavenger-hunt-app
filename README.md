@@ -1,6 +1,6 @@
 # Freeman-scavenger-hunt-app
 Web application built for a house event at Connecticut College. This application 
-was built for mobile devices. The idea is the have a 10 to 20 questions or riddles 
+was built for mobile devices. The idea was to have 10 to 20 questions or riddles 
 around a dorm that are accessible by QR codes. Logged in users could access the 
 riddles by scanning the QR codes. 
 
@@ -16,8 +16,9 @@ applicable
 Finally excute
 
 ```bash
-python app.py to run the project on localhost.
+python app.py 
 ```
+to run the project on localhost.
 
 ## Hosting the project on the internet
 You can use a service like ngrok to host localhost project on an exposed port.
