@@ -133,4 +133,4 @@ if __name__ == '__main__':
     game_table.create_table()
     user_table = UserTable(**config)
     user_table.create_table()
-    app.run(debug=True)
+    app.run()

@@ -232,24 +232,24 @@ class UserTable:
         conn.commit()
         return True
 
-if __name__ == '__main__':
-    config = {
-        'user': 'test-user',
-        'password': 'password',
-        'host': 'localhost',
-        'database': 'test_web_app',
-        #'port': '18159'
-    } 
-    ans_schema = AnswerTable(**config)
-    q_ans ={ 
-        'one' : 1,
-        'two' : 2, 
-        'three' : 3,
-        'four' : 4
-    }
-    ans_schema.create_table(**q_ans)
+#if __name__ == '__main__':
+    # config = {
+    #     'user': 'test-user',
+    #     'password': 'password',
+    #     'host': 'localhost',
+    #     'database': 'test_web_app',
+    #     #'port': '18159'
+    # } 
+    # ans_schema = AnswerTable(**config)
+    # q_ans ={ 
+    #     'one' : 1,
+    #     'two' : 2, 
+    #     'three' : 3,
+    #     'four' : 4
+    # }
+    # ans_schema.create_table(**q_ans)
 
-    print(user_table.query_user('Nikesh15', '9807'))
-    game_table.add_new_entry('Abi')
-    #game_table.add_new_entry('Abi')
-    game_table.add_new_entry('Nikesh')
+    # print(user_table.query_user('Nikesh15', '9807'))
+    # game_table.add_new_entry('Abi')
+    # #game_table.add_new_entry('Abi')
+    # game_table.add_new_entry('Nikesh')
