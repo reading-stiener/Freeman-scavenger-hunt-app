@@ -4,16 +4,8 @@
 
 {% block content %}
 {% if num == 'SQRF' %}
-<p style="font-size:24px;">This board has 12 dots on it. Your task is to connect these dots to form as many squares as possible.
-  <br>
-  <br>
-  You can use each dot multiple times, and you can orient the squares however you wish to fit them on the board.
-  However, to be counted as a square, each corner must be on a dot.
-<br>
-<br>
-  How many different squares can be drawn on the board?
+<p style="font-size:24px;">Who did Forbes name the youngest “self-made billionaire ever” in 2019?
 </p>
-<img src="{{url_for('static', filename='images/img_1_q.png')}}" align="middle" class="center"/>
 <form action="" method="post">
     <div class="wrap-input100 validate-input">
   <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
@@ -35,13 +27,8 @@
   </div>
   </form> 
   {% elif num == 'CBRF' %}
-  <p style="font-size:24px;">You want to create a cube out of metal wiring using the fewest number of wires possible.
-
-    You can bend each wire as many times as you like, but no portion of the cube can have more than one length of wire running over the same edge. Don't worry about how one wire will connect to the next, because you'll use a soldering iron later on.
-    
-    What is the fewest number of wires required to complete the task described above?    
+  <p style="font-size:24px;">Which hard seltzer did America face a shortage of in 2019?   
   </p>
-  <img src="{{url_for('static', filename='images/img_2_q.png')}}" align="middle"  class="center" />
   <form action="" method="post">
       <div class="wrap-input100 validate-input">
     <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
@@ -64,12 +51,8 @@
     </form> 
 
     {% elif num == 'PLRF' %}
-    <p style="font-size:24px;">You have at your disposal a large number of tiles like the one shown below.
-
-      If you were to take these tiles and try to make a square, what is the fewest number of tiles you'd need?
-      
+    <p style="font-size:24px;">Which artist made history in 2020 as the youngest winner of the Grammys’ four main categories?
     </p>
-    <img src="{{url_for('static', filename='images/img_3_q.png')}}" align="middle" class="center" />
     <form action="" method="post">
         <div class="wrap-input100 validate-input">
       <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
@@ -91,12 +74,8 @@
       </div>
       </form> 
       {% elif num == 'BXRF' %}
-      <p style="font-size:24px;">In preparation for your big move, you've packed your belongings into 20 boxes and arranged them as shown below. With everything packed, you are now ready to label each box with its contents. In order to do so, though, you'll need to move a few boxes around.
-
-        How many of the boxes can't be labeled without rearranging the stacks?
-        
+      <p style="font-size:24px;">Elon Musk and Grimes recently brought a baby boy into the world, but what is his name? (Copy it from google, you can't type that lol)
       </p>
-      <img src="{{url_for('static', filename='images/img_4_q.png')}}" align="middle" class="center" />
       <form action="" method="post">
           <div class="wrap-input100 validate-input">
         <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
@@ -118,9 +97,7 @@
         </div>
         </form> 
         {% elif num == 'CSRF' %}
-        <p style="font-size:24px;">Several circles and squares are pictured in the diagram below. How many times larger is the area of the blue square when compared to that of the red square? 
-        </p>
-        <img src="{{url_for('static', filename='images/img_5_q.png')}}" align="middle" class="center" />
+        <p style="font-size:24px;">Name the columbian performer who headlined the 2020 Superbowl halftime show.</p>
         <form action="" method="post">
             <div class="wrap-input100 validate-input">
           <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
@@ -171,16 +148,8 @@
             </form> 
 
             {% elif num == 'TFRF' %}
-            <p style="font-size:24px;">One day while you're speaking to two boys of the same family, they tell you:
-              "I have a brother two years older than me."
-              "I have a brother three years older than me."
-              The next day, two boys from the same family tell you:
-              "I have a brother one year younger than me."
-              "I have a brother four years younger than me."
-              What is the minimum number of sons there could possibly be in that family?
-              
+            <p style="font-size:24px;"> How many super bowls has tom brady won?
             </p>
-            <img src="{{url_for('static', filename='images/img_7_q.png')}}" align="middle" class="center" />
             <form action="" method="post">
                 <div class="wrap-input100 validate-input">
               <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{
@@ -203,14 +172,7 @@
               </form> 
 
               {% elif num == 'CLRF' %}
-              <p style="font-size:24px;">In an average 365-day year, the family in this house burns one bundle of wood per day in the fireplace.
-
-                In the three-month period starting this month, the family will burn three more bundles of wood than in the three-month period after it.
-                
-                From this information alone, can you guess what the current month is?
-                
-                Express your answer as a number
-                
+              <p style="font-size:24px;">Which Marvel superhero was the first to make it to the big screen? (Don't forget the space)
               </p>
               <!-- <img src="{{url_for('static', filename='images/img_8_q.png')}}" align="middle" /> -->
               <form action="" method="post">
@@ -234,14 +196,8 @@
                 </div>
                 </form> 
                 {% elif num == 'GMRF' %}
-                <p style="font-size:24px;">Twenty-seven glass boxes have been stacked together to form a cube.
-
-                  Some of the glass boxes have a gemstone inside. Image A shows a view of the cube from above, B shows a view from the side, and C shows a view from the front.
-                  
-                  How many of the boxes contain gems? 
-                  
+                <p style="font-size:24px;">Which actor won an Oscar for his performance in Bohemian Rhapsody?
                 </p>
-                <img src="{{url_for('static', filename='images/img_9_q.png')}}" align="middle" class="center" />
                 <form action="" method="post">
                     <div class="wrap-input100 validate-input">
                   <input class="input100" type="text" name="answer" placeholder="Enter Answer" value="{{

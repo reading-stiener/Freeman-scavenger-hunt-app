@@ -117,15 +117,15 @@ if __name__ == '__main__':
     } 
     ans_schema = AnswerTable(**config)
     q_ans ={ 
-        'SQRF' : 11,
-        'CBRF' : 4, 
-        'PLRF' : 20,
-        'BXRF' : 3,
-        'CSRF' : 4,
+        'SQRF' : 'Kylie Jenner',
+        'CBRF' : 'White Claw', 
+        'PLRF' : 'Billie Eilish',
+        'BXRF' : 'X Æ A-123',
+        'CSRF' : 'Shakira',
         'TBRF' : 'water',
-        'TFRF' : 3,
-        'CLRF' : 'november',
-        'GMRF' : 5,
+        'TFRF' : 6,
+        'CLRF' : 'Iron Man',
+        'GMRF' : 'Rami Malek',
         'GGRF' : 3
     }
     ans_schema.create_table(**q_ans)
